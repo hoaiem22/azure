@@ -32,7 +32,7 @@ public class AccountRoleController implements BaseController<FevAccountRole> {
 	AccountRoleRepository accountRoleRepository;
 
 	// GET
-	// Display all album
+	// Display all account role
 	@GetMapping(path = path, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Override

@@ -33,7 +33,7 @@ public class EventAlbumController implements BaseController<FevEventAlbum> {
 	EventAlbumRepository eventAlbumRepository;
 
 	// GET
-	// Display all album
+	// Display all event album
 	@GetMapping(path = path, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Override
@@ -42,7 +42,7 @@ public class EventAlbumController implements BaseController<FevEventAlbum> {
 		return (List<FevEventAlbum>) eventAlbumRepository.findAll();
 	}
 
-	// Get Album By ID
+	// Get event album By ID
 	@GetMapping(path = path + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Override
@@ -59,7 +59,7 @@ public class EventAlbumController implements BaseController<FevEventAlbum> {
 		return (int) eventAlbumRepository.count();
 	}
 
-	// Delete Event By ID
+	// Delete event album By ID
 	@DeleteMapping(path = path + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Override
@@ -68,6 +68,7 @@ public class EventAlbumController implements BaseController<FevEventAlbum> {
 
 	}
 
+	//Add new event album
 	@PostMapping(path = path, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@Override
@@ -80,7 +81,7 @@ public class EventAlbumController implements BaseController<FevEventAlbum> {
 		eventAlbumRepository.save(object);
 	}
 
-	// Create new Event
+	// Update event album
 	@PutMapping(path = path, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@Override

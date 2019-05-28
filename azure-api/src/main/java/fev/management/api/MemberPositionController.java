@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fev.management.entity.FevAccount;
+import fev.management.entity.FevMember;
 import fev.management.entity.FevMemberPosition;
 import fev.management.repository.MemberPositionRepository;
 
@@ -31,7 +33,7 @@ public class MemberPositionController implements BaseController<FevMemberPositio
 	MemberPositionRepository memberPositionRepository;
 
 	// GET
-	// Display all album
+	// Display all member position
 	@GetMapping(path)
 	@ResponseBody
 	@Override
@@ -40,7 +42,7 @@ public class MemberPositionController implements BaseController<FevMemberPositio
 		return (List<FevMemberPosition>) memberPositionRepository.findAll();
 	}
 
-	// Get Album By ID
+	// Get member position By ID
 	@GetMapping(path + "/{id}")
 	@ResponseBody
 	@Override
@@ -57,7 +59,7 @@ public class MemberPositionController implements BaseController<FevMemberPositio
 		return (int) memberPositionRepository.count();
 	}
 
-	// Get Event By ID
+	// Get member position By ID
 	@DeleteMapping(path + "/{id}")
 	@ResponseBody
 	@Override
@@ -65,21 +67,32 @@ public class MemberPositionController implements BaseController<FevMemberPositio
 		memberPositionRepository.deleteById(id);
 
 	}
-
-	@PostMapping(path + "/{memPos}")
+	// Create new Event
+	@PostMapping(path)
 	@ResponseBody
 	@Override
-	public void create(@PathVariable("memPos") FevMemberPosition object) {
+	public void create(@RequestBody FevMemberPosition object) {
 		// TODO Auto-generated method stub
 		memberPositionRepository.save(object);
 	}
 
-	// Create new Event
-	@PutMapping(path + "/{memPos}")
+	// Update member position
+	@PutMapping(path = path + "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }) 
 	@ResponseBody
 	@Override
 	public void update(@RequestBody FevMemberPosition object, @PathVariable("id") int id) {
 		// TODO Auto-generated method stub
+		FevMemberPosition memberPosition = memberPositionRepository.findById(id).get();
+		if (memberPosition == null) {
+			return;
+		} else {
+			if (object.getPosition() != null) {
+				memberPosition.setPosition(object.getPosition());
+			}
+			if (object.getNote() != null) {
+				memberPosition.setNote(object.getNote());
+			}
+		}
 		memberPositionRepository.save(object);
 	}
 }

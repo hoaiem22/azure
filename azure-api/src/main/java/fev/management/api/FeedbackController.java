@@ -34,6 +34,7 @@ public class FeedbackController implements BaseController<FevFeedback> {
 	@Autowired
 	FeedbackRepository feedbackRepository;
 
+	// Get all feedback
 	@GetMapping(path = path, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@Override
@@ -41,6 +42,7 @@ public class FeedbackController implements BaseController<FevFeedback> {
 		return (List<FevFeedback>) feedbackRepository.findAll();
 	}
 
+	// Search feedback by ID
 	@GetMapping(path = path + "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@Override
@@ -58,6 +60,7 @@ public class FeedbackController implements BaseController<FevFeedback> {
 		return (int) feedbackRepository.count();
 	}
 
+	// Delete feedback by ID
 	@DeleteMapping(path = path + "/{id}")
 	@ResponseBody
 	@Override
@@ -66,8 +69,7 @@ public class FeedbackController implements BaseController<FevFeedback> {
 		feedbackRepository.deleteById(id);
 	}
 
-	// CREATE
-	// Create new Event
+	// Create new feedback
 	@PostMapping(path = path)
 	@ResponseBody
 	@Override
@@ -80,8 +82,7 @@ public class FeedbackController implements BaseController<FevFeedback> {
 		feedbackRepository.save(object);
 	}
 
-	// UPDATE
-	// Create new Event
+	// UPDATE feedback
 	@PutMapping(path = path)
 	@ResponseBody
 	@Override

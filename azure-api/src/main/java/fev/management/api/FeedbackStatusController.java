@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class FeedbackStatusController implements BaseController<FevFeedbackStatu
     FeedbackStatusRepository feedbackStatusRepository;
 
     // GET
-    // Display all album
+    // Display all feedback status
     @GetMapping(path)
     @ResponseBody
     @Override
@@ -43,7 +44,7 @@ public class FeedbackStatusController implements BaseController<FevFeedbackStatu
         return (List<FevFeedbackStatus>) feedbackStatusRepository.findAll();
     }
 
-    // Get Album By ID
+    // Get feedback status By ID
     @GetMapping(path + "/{id}")
     @ResponseBody
     @Override
@@ -60,7 +61,7 @@ public class FeedbackStatusController implements BaseController<FevFeedbackStatu
         return (int) feedbackStatusRepository.count();
     }
 
-    // Get Event By ID
+    // Delete feedback status By ID
     @DeleteMapping(path + "/{id}")
     @ResponseBody
     @Override
@@ -69,20 +70,32 @@ public class FeedbackStatusController implements BaseController<FevFeedbackStatu
         feedbackStatusRepository.deleteById(id);
     }
 
-    @PostMapping(path + "/{fbstatus}")
+    //Add new feedback status
+    @PostMapping(path)
     @ResponseBody
     @Override
-    public void create(@PathVariable("fbstatus") FevFeedbackStatus object) {
+    public void create(@RequestBody FevFeedbackStatus object) {
         // TODO Auto-generated method stub
         feedbackStatusRepository.save(object);
     }
 
-    // Create new Event
-    @PutMapping(path + "/{fbstatus}")
+    // Update feedback status
+    @PutMapping(path = path + "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @Override
     public void update(@RequestBody FevFeedbackStatus object, @PathVariable("id") int id) {
         // TODO Auto-generated method stub
+    	FevFeedbackStatus fbStatus = feedbackStatusRepository.findById(id).get();
+		if (fbStatus == null) {
+			return;
+		} else {
+			if (object.getStatus() != null) {
+				fbStatus.setStatus(object.getStatus());
+			}
+			if (object.getNote() != null) {
+				fbStatus.setNote(object.getNote());
+			}
+		}
         feedbackStatusRepository.save(object);
     }
 }

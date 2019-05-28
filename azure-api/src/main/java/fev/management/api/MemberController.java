@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fev.management.entity.FevAccount;
+import fev.management.entity.FevFeedbackStatus;
 import fev.management.entity.FevMember;
 import fev.management.repository.MemberRepository;
 
@@ -37,7 +39,7 @@ public class MemberController implements BaseController<FevMember> {
 	MemberRepository memberRepository;
 
 	// GET
-	// Display all album
+	// Display all member
 	@CrossOrigin
 	@GetMapping(path)
 	@ResponseBody
@@ -47,7 +49,7 @@ public class MemberController implements BaseController<FevMember> {
 		return (List<FevMember>) memberRepository.findAll();
 	}
 
-	// Get Album By ID
+	// Get member By ID
 	@GetMapping(path + "/{id}")
 	@ResponseBody
 	@Override
@@ -64,7 +66,7 @@ public class MemberController implements BaseController<FevMember> {
 		return (int) memberRepository.count();
 	}
 
-	// Get Event By ID
+	// Get member By ID
 	@DeleteMapping(path + "/{id}")
 	@ResponseBody
 	@Override
@@ -72,8 +74,9 @@ public class MemberController implements BaseController<FevMember> {
 		memberRepository.deleteById(id);
 
 	}
-
-	@PostMapping(path + "/{member}")
+	
+	// Create new member
+	@PostMapping(path)
 	@ResponseBody
 	@Override
 	public void create(@PathVariable("member") FevMember object) {
@@ -81,12 +84,47 @@ public class MemberController implements BaseController<FevMember> {
 		memberRepository.save(object);
 	}
 
-	// Create new Event
-	@PutMapping(path + "/{member}")
+	//Update member
+	@PutMapping(path = path + "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@Override
 	public void update(@RequestBody FevMember object, @PathVariable("id") int id) {
 		// TODO Auto-generated method stub
+		FevMember member = memberRepository.findById(id).get();
+		if (member == null) {
+			return;
+		} else {
+			if (object.getFullname() != null) {
+				member.setFullname(object.getFullname());
+			}
+			if (object.getStudentID() != null) {
+				member.setStudentID(object.getStudentID());
+			}
+			if (object.getBirthdate() != null) {
+				member.setBirthdate(object.getBirthdate());
+			}
+			if (object.getSex() != null) {
+				member.setSex(object.getSex());
+			}
+			if (object.getAddress() != null) {
+				member.setAddress(object.getAddress());
+			}
+			if (object.getPhone() != null) {
+				member.setPhone(object.getPhone());
+			}
+			if (object.getPosition() != null) {
+				member.setPosition(object.getPosition());
+			}
+			if (object.getStatus() != null) {
+				member.setStatus(object.getStatus());
+			}
+			if (object.getPoint() != null) {
+				member.setPoint(object.getPoint());
+			}
+			if (object.getNote() != null) {
+				member.setNote(object.getNote());
+			}
+		}
 		memberRepository.save(object);
 	}
 

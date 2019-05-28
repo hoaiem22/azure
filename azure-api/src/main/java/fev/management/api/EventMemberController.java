@@ -33,7 +33,7 @@ public class EventMemberController implements BaseController<FevEventMember> {
     EventMemberRepository eventMemberRepository;
 
     // GET
-    // Display all album
+    // Display all event member
     @GetMapping(path=path, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @Override
@@ -42,7 +42,7 @@ public class EventMemberController implements BaseController<FevEventMember> {
         return (List<FevEventMember>) eventMemberRepository.findAll();
     }
 
-    // Get Album By ID
+    // Get event member By ID
     @GetMapping(path = path + "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @Override
@@ -59,7 +59,7 @@ public class EventMemberController implements BaseController<FevEventMember> {
         return (int) eventMemberRepository.count();
     }
 
-    // Get Event By ID
+    // Get event member By ID
     @DeleteMapping(path + "/{id}")
     @ResponseBody
     @Override
@@ -68,6 +68,7 @@ public class EventMemberController implements BaseController<FevEventMember> {
         eventMemberRepository.deleteById(id);
     }
 
+    //Add new event member
     @PostMapping(path = path + "/{em}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @Override
@@ -80,7 +81,7 @@ public class EventMemberController implements BaseController<FevEventMember> {
         eventMemberRepository.save(object);
     }
 
-    // Create new Event
+    //Update ew Event
     @PutMapping(path + "/{em}")
     @ResponseBody
     @Override

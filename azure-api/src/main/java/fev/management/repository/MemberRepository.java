@@ -24,4 +24,8 @@ public interface MemberRepository extends CrudRepository<FevMember, Integer> {
     //Find Member by fullname
     @Query(nativeQuery = true, value = "select * from fev_member where fullname = :fullname")
     FevMember findByFullname(@Param("fullname") String fullname);
+
+    //Find Member by fullname
+    @Query(nativeQuery = true, value = "select * from fev_member where fullname like %:name%")
+    List<FevMember> findByName(@Param("name") String name);
 }

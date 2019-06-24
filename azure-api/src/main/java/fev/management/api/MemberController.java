@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,14 @@ public class MemberController implements BaseController<FevMember> {
 		return memberRepository.findById(id);
 	}
 
+	// Find members by name
+	@PostMapping(path + "/name" )
+	@ResponseBody
+	public List<FevMember> getByName(@Valid @RequestBody String name) {
+		// TODO Auto-generated method stub
+		return memberRepository.findByName(name);
+	}
+
 	@GetMapping(path + "/count")
 	@ResponseBody
 	@Override
@@ -74,12 +83,12 @@ public class MemberController implements BaseController<FevMember> {
 		memberRepository.deleteById(id);
 
 	}
-	
+
 	// Create new member
 	@PostMapping(path)
 	@ResponseBody
 	@Override
-	public void create(@PathVariable("member") FevMember object) {
+	public void create(@Valid @RequestBody FevMember object) {
 		// TODO Auto-generated method stub
 		memberRepository.save(object);
 	}

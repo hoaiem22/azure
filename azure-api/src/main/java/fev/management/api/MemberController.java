@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import fev.management.entity.*;
 import fev.management.model.member.FevMemberCreate;
+import fev.management.model.member.FevMemberUpdate;
 import fev.management.repository.MemberPositionRepository;
 import fev.management.repository.MemberStatusRepository;
 import org.modelmapper.ModelMapper;
@@ -164,6 +165,50 @@ public class MemberController implements BaseController<FevMember> {
 		}
 		memberRepository.save(object);
 	}
+
+    //Update member
+    @PutMapping(path = path + "/update/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+
+    public void update(@RequestBody FevMemberUpdate memberUpdate, @PathVariable("id") int id) {
+        // TODO Auto-generated method stub
+        FevMember member = memberRepository.findById(id).get();
+        if (member == null) {
+            return;
+        } else {
+            if (memberUpdate.getFullname() != null) {
+                member.setFullname(memberUpdate.getFullname());
+            }
+            if (memberUpdate.getStudentID() != null) {
+                member.setStudentID(memberUpdate.getStudentID());
+            }
+            if (memberUpdate.getBirthdate() != null) {
+                member.setBirthdate(memberUpdate.getBirthdate());
+            }
+            if (memberUpdate.getSex() != null) {
+                member.setSex(memberUpdate.getSex());
+            }
+            if (memberUpdate.getAddress() != null) {
+                member.setAddress(memberUpdate.getAddress());
+            }
+            if (memberUpdate.getPhone() != null) {
+                member.setPhone(memberUpdate.getPhone());
+            }
+            if (memberUpdate.getPosition() != null) {
+                member.setPosition(memberPositionRepository.findByPosition(memberUpdate.getPosition()));
+            }
+            if (memberUpdate.getStatus() != null) {
+                member.setStatus(memberStatusRepository.findByStatus(memberUpdate.getStatus()));
+            }
+            if (memberUpdate.getPoint() != null) {
+                member.setPoint(memberUpdate.getPoint());
+            }
+            if (memberUpdate.getNote() != null) {
+                member.setNote(memberUpdate.getNote());
+            }
+        }
+        memberRepository.save(member);
+    }
 
 	@RequestMapping(value = path + "/fetch", method = RequestMethod.GET)
 	public List<FevMember> getAllFetch(HttpServletRequest request, HttpServletResponse resp) {

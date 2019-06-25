@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import fev.management.entity.*;
+import fev.management.model.member.FevMemberCreate;
+import fev.management.repository.MemberPositionRepository;
+import fev.management.repository.MemberStatusRepository;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fev.management.entity.FevAccount;
-import fev.management.entity.FevFeedbackStatus;
-import fev.management.entity.FevMember;
 import fev.management.repository.MemberRepository;
+import sun.rmi.runtime.Log;
 
 @Controller
 public class MemberController implements BaseController<FevMember> {
@@ -38,6 +41,12 @@ public class MemberController implements BaseController<FevMember> {
 
 	@Autowired
 	MemberRepository memberRepository;
+
+	@Autowired
+	MemberStatusRepository memberStatusRepository;
+
+	@Autowired
+	MemberPositionRepository memberPositionRepository;
 
 	// GET
 	// Display all member
@@ -85,12 +94,34 @@ public class MemberController implements BaseController<FevMember> {
 	}
 
 	// Create new member
-	@PostMapping(path)
+	@PostMapping(path = path + "/skip", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+			consumes = { "application/json" })
 	@ResponseBody
 	@Override
-	public void create(@Valid @RequestBody FevMember object) {
-		// TODO Auto-generated method stub
+	public void create(@RequestBody FevMember object) {
+		LOG.info("Postion: " + object.getPosition().getPosition());
 		memberRepository.save(object);
+	}
+
+	// Create new member
+	@PostMapping(path = path, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+			consumes = { "application/json" })
+	@ResponseBody
+	public void create(@RequestBody FevMemberCreate member) {
+		LOG.info("Postion: " + member.getPosition());
+		ModelMapper mapper = new ModelMapper();
+		FevMember fevMember = mapper.map(member, FevMember.class);
+		//Update FevStatus and FevPosition
+		FevMemberPosition pos = memberPositionRepository.findByPosition(member.getPosition());
+		if(pos != null) {
+			fevMember.setPosition(pos);
+		}
+		FevMemberStatus stt = memberStatusRepository.findByStatus(member.getStatus());
+		if(stt != null){
+			fevMember.setStatus(stt);
+		}
+		LOG.info("After mapping: " + fevMember.getFullname());
+		memberRepository.save(fevMember);
 	}
 
 	//Update member

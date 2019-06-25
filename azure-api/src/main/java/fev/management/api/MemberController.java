@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fev.management.repository.MemberRepository;
-import sun.rmi.runtime.Log;
 
 @Controller
 public class MemberController implements BaseController<FevMember> {
@@ -48,16 +47,14 @@ public class MemberController implements BaseController<FevMember> {
 	@Autowired
 	MemberPositionRepository memberPositionRepository;
 
-	// GET
-	// Display all member
-	@CrossOrigin
-	@GetMapping(path)
-	@ResponseBody
-	@Override
-	public List<FevMember> getAll() {
-		// TODO Auto-generated method stub
-		return (List<FevMember>) memberRepository.findAll();
-	}
+    @CrossOrigin
+    @GetMapping(path = path)
+    @ResponseBody
+    @Override
+    public List<FevMember> getAll() {
+        // TODO Auto-generated method stub
+        return (List<FevMember>) memberRepository.findAll();
+    }
 
 	// Get member By ID
 	@GetMapping(path + "/{id}")

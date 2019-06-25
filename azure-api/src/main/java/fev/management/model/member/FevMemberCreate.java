@@ -1,9 +1,8 @@
 package fev.management.model.member;
-
 import java.io.Serializable;
 import java.util.Date;
 
-public class FevMemberCreate implements Serializable {
+public class FevMemberCreate implements Serializable{
     private Integer id;
     private String fullname;
     private String studentID;

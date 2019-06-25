@@ -6,6 +6,7 @@
 package fev.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -84,14 +85,19 @@ public class FevMember implements Serializable {
     @JoinColumn(name = "status", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private FevMemberStatus status;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "burden")
     private Collection<FevTransaction> fevTransactionCollection;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate")
     private Collection<FevVote> fevVoteCollection;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "leader")
     private Collection<FevEvent> fevEventCollection;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "holder")
     private Collection<FevInventory> fevInventoryCollection;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member1")
     private Collection<FevVoteCandidate> fevVoteCandidateCollection;
 

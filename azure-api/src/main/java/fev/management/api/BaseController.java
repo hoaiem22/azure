@@ -1,17 +1,10 @@
 package fev.management.api;
 
-import java.lang.annotation.Inherited;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import fev.management.entity.FevEvent;
-import fev.management.entity.FevFeedback;
 
 @RequestMapping("/api")
 public interface BaseController<Object> {
@@ -31,7 +24,7 @@ public interface BaseController<Object> {
     public abstract void deleteByID( int id);
     
     //CREATE
-    public abstract void create(Object object);
+    public abstract void create(@RequestBody Object object);
     
     //UPDATE
     public abstract void update(Object object, @PathVariable("id") int id);

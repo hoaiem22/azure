@@ -75,13 +75,14 @@ public class FevMember implements Serializable {
     private Integer point;
     @Column(name = "note", length = 255)
     private String note;
+    @JsonBackReference
     @OneToMany(mappedBy = "member1")
     private Collection<FevEventMember> fevEventMemberCollection;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "position", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private FevMemberPosition position;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "status", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private FevMemberStatus status;

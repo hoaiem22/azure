@@ -54,6 +54,7 @@ public class MemberController implements BaseController<FevMember> {
     @Override
     public List<FevMember> getAll() {
         // TODO Auto-generated method stub
+//        List<FevMember> list = (List<FevMember>) memberRepository.findAll();
         return (List<FevMember>) memberRepository.findAll();
     }
 

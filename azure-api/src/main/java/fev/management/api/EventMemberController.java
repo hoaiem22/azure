@@ -22,7 +22,7 @@ import fev.management.entity.FevEventMember;
 import fev.management.repository.EventMemberRepository;
 
 @Controller
-public class EventMemberController implements BaseController<FevEventMember> {
+public class EventMemberController implements BaseController<FevEventMember,FevEventMember> {
 
     /** For logging. */
     private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

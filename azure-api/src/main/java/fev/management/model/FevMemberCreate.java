@@ -1,4 +1,4 @@
-package fev.management.model.member;
+package fev.management.model;
 import java.io.Serializable;
 import java.util.Date;
 

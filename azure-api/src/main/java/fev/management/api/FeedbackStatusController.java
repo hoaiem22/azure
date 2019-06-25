@@ -24,7 +24,7 @@ import fev.management.repository.EventMemberRepository;
 import fev.management.repository.FeedbackStatusRepository;
 
 @Controller
-public class FeedbackStatusController implements BaseController<FevFeedbackStatus>{
+public class FeedbackStatusController implements BaseController<FevFeedbackStatus,FevFeedbackStatus>{
 
     /** For logging. */
     private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

@@ -22,7 +22,7 @@ import fev.management.entity.FevMemberPosition;
 import fev.management.repository.MemberPositionRepository;
 
 @Controller
-public class MemberPositionController implements BaseController<FevMemberPosition> {
+public class MemberPositionController implements BaseController<FevMemberPosition,FevMemberPosition> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

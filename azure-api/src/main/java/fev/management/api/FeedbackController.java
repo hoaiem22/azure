@@ -24,7 +24,7 @@ import fev.management.entity.FevFeedback;
 import fev.management.repository.FeedbackRepository;
 
 @Controller
-public class FeedbackController implements BaseController<FevFeedback> {
+public class FeedbackController implements BaseController<FevFeedback,FevFeedback> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(FeedbackRepository.class);

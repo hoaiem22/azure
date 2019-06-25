@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RequestMapping("/api")
-public interface BaseController<Object> {
+public interface BaseController<O, I> {
 
     // GET
     // Display all event
-    public abstract List<Object> getAll();
+    public abstract List<O> getAll();
 
     // Get Event By ID
-    public abstract Optional<Object> getByID(@PathVariable("id") int id);
+    public abstract Optional<O> getByID(@PathVariable("id") int id);
 
     //Get total
     public abstract int getCount();
@@ -24,9 +24,9 @@ public interface BaseController<Object> {
     public abstract void deleteByID( int id);
     
     //CREATE
-    public abstract void create(@RequestBody Object object);
-    
+    public abstract void create(@RequestBody I i);
+
     //UPDATE
-    public abstract void update(Object object, @PathVariable("id") int id);
+    public abstract void update(@RequestBody I i, @PathVariable("id") int id);
 
 }

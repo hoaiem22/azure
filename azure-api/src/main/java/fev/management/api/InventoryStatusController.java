@@ -22,7 +22,7 @@ import fev.management.entity.FevInventoryStatus;
 import fev.management.repository.InventoryStatusRepository;
 
 @Controller
-public class InventoryStatusController implements BaseController<FevInventoryStatus> {
+public class InventoryStatusController implements BaseController<FevInventoryStatus,FevInventoryStatus> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

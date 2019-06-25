@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Controller
-public class EventController implements BaseController<FevEvent> {
+public class EventController implements BaseController<FevEvent, FevEvent> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

@@ -21,7 +21,7 @@ import fev.management.entity.FevAccountRole;
 import fev.management.repository.AccountRoleRepository;
 
 @Controller
-public class AccountRoleController implements BaseController<FevAccountRole> {
+public class AccountRoleController implements BaseController<FevAccountRole, FevAccountRole> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

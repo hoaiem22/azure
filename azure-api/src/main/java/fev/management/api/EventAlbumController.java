@@ -22,7 +22,7 @@ import fev.management.repository.EventAlbumRepository;
 import fev.management.repository.EventRepository;
 
 @Controller
-public class EventAlbumController implements BaseController<FevEventAlbum> {
+public class EventAlbumController implements BaseController<FevEventAlbum, FevEventAlbum> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventAlbumController.class);

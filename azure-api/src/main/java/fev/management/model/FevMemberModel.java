@@ -1,8 +1,8 @@
-package fev.management.model.member;
+package fev.management.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class FevMemberUpdate implements Serializable{
+public class FevMemberModel implements Serializable{
     private Integer id;
     private String fullname;
     private String studentID;
@@ -15,10 +15,10 @@ public class FevMemberUpdate implements Serializable{
     private String position;
     private String status;
 
-    public FevMemberUpdate() {
+    public FevMemberModel() {
     }
 
-    public FevMemberUpdate(Integer id, String fullname, String studentID, Date birthdate, String sex, String address, String phone, Integer point, String note, String position, String status) {
+    public FevMemberModel(Integer id, String fullname, String studentID, Date birthdate, String sex, String address, String phone, Integer point, String note, String position, String status) {
         this.id = id;
         this.fullname = fullname;
         this.studentID = studentID;

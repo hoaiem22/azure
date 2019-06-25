@@ -23,7 +23,7 @@ import fev.management.repository.AccountRepository;
 import fev.management.service.UserService;
 
 @Controller
-public class AccountController implements BaseController<FevAccount> {
+public class AccountController implements BaseController<FevAccount, FevAccount> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

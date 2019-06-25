@@ -22,7 +22,7 @@ import fev.management.entity.FevTransactionType;
 import fev.management.repository.TransactionTypeRepository;
 
 @Controller
-public class TransactionTypeController implements BaseController<FevTransactionType> {
+public class TransactionTypeController implements BaseController<FevTransactionType,FevTransactionType> {
 
 	/** For logging. */
 	private final static Logger LOG = LoggerFactory.getLogger(EventController.class);

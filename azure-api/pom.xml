@@ -132,6 +132,7 @@
                 <configuration>
                     <providerSelection>${gmavenProviderSelection}</providerSelection>
                     <sourceEncoding>UTF-8</sourceEncoding>
+
                 </configuration>
                 <executions>
                     <execution>

@@ -22,7 +22,7 @@
 		<azure.version>2.1.2</azure.version>
 		<gmavenVersion>1.4</gmavenVersion>
 		<gmavenProviderSelection>2.0</gmavenProviderSelection>
-		<groovyVersion>2.0.0</groovyVersion>
+		<groovyVersion>2.4.21</groovyVersion>
 	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
